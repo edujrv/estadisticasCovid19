@@ -3,7 +3,7 @@ public class Testeo{
     private int idEventoCaso;
     private char sexo;
     private int edad;
-    private boolean edadTipo; // 1 -> meses //// 0 -> anios
+    private String edadTipo;
     private String residenciaPais;
     private String residenciaProvincia;
     private String residenciaDepartamento;
@@ -12,13 +12,14 @@ public class Testeo{
     private String fechaApertura;
     private String sepiApertura;
     private String fechaInternacion;
-    private boolean cuidadoIntensivo; //Verdadero -> Estuvo en cuidado
+    private String cuidadoIntensivo; //Verdadero -> Estuvo en cuidado
     private String fechaCuidadoIntensivo;
-    private boolean fallecido; //Verdadero->Muerto //hatch en cs = verdadero
+    private String fallecido; //Verdadero->Muerto //hatch en cs = verdadero
     private String fechaFallecimiento;
-    private boolean asistenciaRespiratoriaMecanica; //Verdadero-> Tuvo asistencia
+    private String asistenciaRespiratoriaMecanica; //Verdadero-> Tuvo asistencia
     private int cargaProvinciaId;
-    private boolean origenFinanciamiento; //Verdadero-> Tenia obra social
+    private String origenFinanciamiento; //Verdadero-> Tenia obra social
+
     private String clasificacion;
     private String clasificacionResumen;
     private int residenciaProvinciaId;
@@ -30,7 +31,8 @@ public class Testeo{
     Testeo() {
 
     }
-    public Testeo(int idEventoCaso, char sexo, int edad, boolean edadTipo, String residenciaPais, String residenciaProvincia, String residenciaDepartamento, String cargaProvincia, String fechaInicioSintomas, String fechaApertura, String sepiApertura, String fechaInternacion, boolean cuidadoIntensivo, boolean fallecido, String fechaCuidadoIntensivo,String fechaFallecimiento, boolean asistenciaRespiratoriaMecanica, int cargaProvinciaId, boolean origenFinanciamiento,  String clasificacion, String clasificacionResumen, int residenciaProvinciaId, String fechaDiagnostico, int residenciaDepartamentoId, String ultimaActualizacion){
+    public Testeo(int idEventoCaso, char sexo, int edad, String edadTipo, String residenciaPais, String residenciaProvincia, String residenciaDepartamento, String cargaProvincia, String fechaInicioSintomas, String fechaApertura, String sepiApertura, String fechaInternacion, String cuidadoIntensivo, String fallecido, String fechaCuidadoIntensivo,String fechaFallecimiento, String asistenciaRespiratoriaMecanica,
+                  int cargaProvinciaId, String origenFinanciamiento,  String clasificacion, String clasificacionResumen, int residenciaProvinciaId, String fechaDiagnostico, int residenciaDepartamentoId, String ultimaActualizacion){
 
 
         this.idEventoCaso = idEventoCaso;
@@ -77,7 +79,7 @@ public class Testeo{
         return edad;
     }
 
-    public boolean isEdadTipo() {
+    public String isEdadTipo() {
         return edadTipo;
     }
 
@@ -113,7 +115,7 @@ public class Testeo{
         return fechaInternacion;
     }
 
-    public boolean isCuidadoIntensivo() {
+    public String isCuidadoIntensivo() {
         return cuidadoIntensivo;
     }
 
@@ -121,7 +123,7 @@ public class Testeo{
         return fechaCuidadoIntensivo;
     }
 
-    public boolean isFallecido() {
+    public String isFallecido() {
         return fallecido;
     }
 
@@ -129,7 +131,7 @@ public class Testeo{
         return fechaFallecimiento;
     }
 
-    public boolean isAsistenciaRespiratoriaMecanica() {
+    public String isAsistenciaRespiratoriaMecanica() {
         return asistenciaRespiratoriaMecanica;
     }
 
@@ -137,7 +139,7 @@ public class Testeo{
         return cargaProvinciaId;
     }
 
-    public boolean isOrigenFinanciamiento() {
+    public String isOrigenFinanciamiento() {
         return origenFinanciamiento;
     }
 
@@ -164,6 +166,15 @@ public class Testeo{
     public String getUltimaActualizacion() {
         return ultimaActualizacion;
     }
+
+
+    public void printData() {
+        System.out.println(idEventoCaso + " - " + sexo + " - " + edad + " - " + edadTipo + " - " + residenciaPais + " - " + residenciaProvincia + " - " + residenciaDepartamento + " - " + cargaProvincia + " - " +
+                fechaInicioSintomas + " - " + fechaApertura + " - " + sepiApertura + " - " + fechaInternacion + " - " + cuidadoIntensivo + " - " + fechaCuidadoIntensivo + " - " + fallecido + " - " + fechaFallecimiento + " - " +
+                asistenciaRespiratoriaMecanica + " - " + cargaProvinciaId + " - " + origenFinanciamiento + " - " + clasificacion + " - " + clasificacionResumen + " - " + residenciaProvinciaId + " - " +
+                fechaDiagnostico + " - " + residenciaDepartamentoId + " - " + ultimaActualizacion);
+    }
+
 //**************************FIN GETTERS **************************************
 
 
