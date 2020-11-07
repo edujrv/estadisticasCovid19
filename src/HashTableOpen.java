@@ -14,8 +14,13 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
     }
 
     public void insert(TypeKey clave, TypeValue value) throws Exception {
-        int pos = hashFunc(clave);
+        try{
+            int pos = hashFunc(clave);
         table[pos].insert(new HashEntry<>(clave, value));
+        }catch(Exception e){
+            System.out.println("ERROR AL INSERTAR EL DATO");
+        }
+        
     }
 
     public TypeValue get(TypeKey clave) throws Exception {
@@ -59,7 +64,7 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
         }
     }
 
-    public static void main(String[] args) {
+ /*   public static void main(String[] args) {
         HashTableOpen<Integer, String> miTable = new HashTableOpen<>(7);
 
         try {
@@ -80,5 +85,5 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
         } catch (Exception e) {
             System.out.println("Se removió correctamente");
         }
-    }
+    }*/
 }

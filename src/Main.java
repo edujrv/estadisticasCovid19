@@ -11,7 +11,9 @@ class Main {
 
     public static void main(String[] args) {
 
-        List<Testeo> testeos = new ArrayList<>();
+    //    List<Testeo> testeos = new ArrayList<>();
+        HashTableOpen<String, Testeo> testeos = new HashTableOpen<>(50);
+       
         String file = "resources/Covid19Casos-10.txt.gz";
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
         try {
@@ -34,19 +36,31 @@ class Main {
                             values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15],
                             values[16], Integer.parseInt(values[17]), values[18], values[19], values[20], Integer.parseInt(values[21]), values[22], Integer.parseInt(values[23]), values[24]);
 
-                    testeos.add(t);
+               
                     numberOfSamples ++;
-                    numberOfDeaths = (values[14].equals("SI")) ? numberOfDeaths++ : numberOfDeaths;
-                    numberOfInfected = (values[20].equals("Confirmado")) ? numberOfInfected++ : numberOfInfected;
+                    numberOfDeaths = (values[14].equals("SI")) ? ++numberOfDeaths : numberOfDeaths;
+                    numberOfInfected = (values[20].equals("Confirmado")) ? ++numberOfInfected : numberOfInfected;
+                        
+                    
+                    // ****************TIRA EXCEPCION*********************
+                    /*
+                        la idea es una tabla que tenga como clave las provincias y como
+                        valor la informacion del testeo
+                    */
+                    //testeos.insert(values[7], t);
+                    //System.out.println(testeos.get(values[7]));
+                    
                 }
                 bandera = true;
             }
-
-            for (Testeo testeo : testeos) {
-                testeo.printData();
-            }
+            br.close();    
         } catch (Exception e) {
             System.out.println("El archivo no se pudo abrir correctamente! ");
         }
+        
+        System.out.println("Cantidad de muestras: " + ++numberOfSamples);
+        System.out.println("Cantidad de muertes: " + numberOfDeaths);
+        System.out.println("Cantidad de Infectados: " + numberOfInfected);
+        
     }
 }
