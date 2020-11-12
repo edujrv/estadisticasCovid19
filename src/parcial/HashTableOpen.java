@@ -19,7 +19,8 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
 
     private int hashFunc(TypeKey key) {
        // return (int) key % table.length;
-       return this.hf.operate(key) % table.length;
+       return this.hf.operate(key) % 
+       table.length;
     }
 
     public void insert(TypeKey clave, TypeValue value) throws Exception {
