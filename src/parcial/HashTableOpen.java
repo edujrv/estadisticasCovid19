@@ -1,16 +1,25 @@
+package parcial;
+
+interface HashFunc<TypeKey extends Comparable>{
+    int operate(TypeKey k);
+}
+
 public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
     AvlTree<HashEntry<TypeKey, TypeValue>>[] table;
+     HashFunc<TypeKey> hf;
 
 
-    public HashTableOpen(int size) {
+    public HashTableOpen(int size, HashFunc<TypeKey> f) {
         this.table = new AvlTree[size];
+        this.hf = f;
         for (int i = 0; i < table.length; i++) {
             table[i] = new AvlTree<>();
         }
     }
 
     private int hashFunc(TypeKey key) {
-        return (int) key % table.length;
+       // return (int) key % table.length;
+       return this.hf.operate(key) % table.length;
     }
 
     public void insert(TypeKey clave, TypeValue value) throws Exception {
@@ -18,7 +27,7 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
             int pos = hashFunc(clave);
         table[pos].insert(new HashEntry<>(clave, value));
         }catch(Exception e){
-            System.out.println("ERROR AL INSERTAR EL DATO");
+            System.out.println(e);
         }
         
     }

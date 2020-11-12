@@ -1,3 +1,6 @@
+package parcial;
+
+
 public class Testeo{
 
     private int idEventoCaso;

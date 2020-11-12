@@ -1,3 +1,5 @@
+package parcial;
+
 import java.io.*;
 import java.util.*;
 
@@ -12,7 +14,13 @@ class Main {
     public static void main(String[] args) {
 
     //    List<Testeo> testeos = new ArrayList<>();
-        HashTableOpen<String, Testeo> testeos = new HashTableOpen<>(50);
+        HashTableOpen<String, Testeo> testeos = new HashTableOpen<>(50, (a)->{
+               int x = 0;
+               for(int i=0; i < a.length(); i++){
+                   x = (i+1) * a.charAt(i);
+               }
+               return x;
+            });
        
         String file = "resources/Covid19Casos-10.txt.gz";
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
@@ -47,15 +55,15 @@ class Main {
                         la idea es una tabla que tenga como clave las provincias y como
                         valor la informacion del testeo
                     */
-                    //testeos.insert(values[7], t);
-                    //System.out.println(testeos.get(values[7]));
+                   testeos.insert(values[7], t);
+                    System.out.println(testeos.get(values[7]));
                     
                 }
                 bandera = true;
             }
             br.close();    
         } catch (Exception e) {
-            System.out.println("El archivo no se pudo abrir correctamente! ");
+           e.printStackTrace();
         }
         
         System.out.println("Cantidad de muestras: " + ++numberOfSamples);
