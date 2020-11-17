@@ -27,7 +27,7 @@ class Main {
 
             });
        
-        String file = "resources/Covid19Casos-10.txt.gz";
+        String file = "resources/Covid19Casos-1000.txt.gz";
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
         int h = 0;
         float  infectedBySamples = 0, deceasedByInfected = 0;
@@ -46,6 +46,9 @@ class Main {
                     if (values[i].length() > 1) {    // evito los datos con comas dobles -> ,,
                         values[i] = values[i].substring(1, values[i].length() - 1);     // acorto el string para que salga sin ""
                     }
+                    if(values[i].length() < 1){
+                        values[i] = "0";
+                    }
                 }
                
                
@@ -54,18 +57,22 @@ class Main {
                             values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15],
                             values[16], Integer.parseInt(values[17]), values[18], values[19], values[20], Integer.parseInt(values[21]), values[22], Integer.parseInt(values[23]), values[24]);
                   
-                             
+                 // hay algunos q no tienen edad, a esos no los tiene que tomar 
+                   
                     if(values[3].equals("Años") && values[20].equals("Confirmado")){
-                     h = (int) (Integer.parseInt(values[2])/10);
-                        ageRangeInfected[h] = ageRangeInfected[h] + 1;
+                        if(!values[2].equals("0")){
+                              h = (int) (Integer.parseInt(values[2])/10);
+                             ageRangeInfected[h] = ageRangeInfected[h] + 1;
+                        }
                     }
                     if(values[3].equals("Meses") && values[20].equals("Confirmado")){
                         ageRangeInfected[0]++;       // en el caso de que la edad se exprese en meses
                     }
-                    if(values[14].equals("SI")){
+                    if(values[14].equals("SI") && !values[2].equals("0")){
                         h = (int) (Integer.parseInt(values[2])/10);
                         ageRangeDeath[h] = ageRangeDeath[h] + 1;
                     }
+                 
                     numberOfSamples++;
                     numberOfDeaths = (values[14].equals("SI")) ? ++numberOfDeaths : numberOfDeaths;
                     numberOfInfected = (values[20].equals("Confirmado")) ? ++numberOfInfected : numberOfInfected;
