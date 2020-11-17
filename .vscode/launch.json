@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - AvlTree",
+            "request": "launch",
+            "mainClass": "parcial.AvlTree",
+            "projectName": "estadisticasCovid19_93dbd1"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "parcial.Main",
+            "projectName": "estadisticasCovid19_93dbd1"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"

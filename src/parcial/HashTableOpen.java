@@ -19,13 +19,13 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
 
     private int hashFunc(TypeKey key) {
        // return (int) key % table.length;
-       return this.hf.operate(key) % 
-       table.length;
+       return this.hf.operate(key) %  table.length;
     }
 
     public void insert(TypeKey clave, TypeValue value) throws Exception {
         try{
             int pos = hashFunc(clave);
+        //    System.out.println(pos); // posicion de la tabla
         table[pos].insert(new HashEntry<>(clave, value));
         }catch(Exception e){
             System.out.println(e);
@@ -36,6 +36,12 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
     public TypeValue get(TypeKey clave) throws Exception {
         int pos = hashFunc(clave);
         return table[pos].get(new HashEntry<>(clave, null)).value;
+    }
+
+    // creada por el uno
+    public void printTree(TypeKey clave) throws Exception {
+        int pos = hashFunc(clave);
+         table[pos].printTree();
     }
 
     public void remove(TypeKey clave) throws Exception {

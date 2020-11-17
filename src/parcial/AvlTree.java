@@ -22,6 +22,7 @@ package parcial;//
  * @author Mark Allen Weiss
  */
 public class AvlTree<AnyType extends Comparable<? super AnyType>> {
+    
     /**
      * Construct the tree.
      */
@@ -364,7 +365,10 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
         AvlNode<AnyType> left;         // Left child
         AvlNode<AnyType> right;        // Right child
         int height;       // Height
-    }
+
+
+       
+    } 
 
     /**
      * The tree root.
@@ -391,4 +395,5 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
             System.out.println("");
         }
     }
+   
 }
