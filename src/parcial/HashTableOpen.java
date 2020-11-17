@@ -4,16 +4,19 @@ interface HashFunc<TypeKey extends Comparable>{
     int operate(TypeKey k);
 }
 
-public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
-    AvlTree<HashEntry<TypeKey, TypeValue>>[] table;
+public class HashTableOpen<TypeKey extends Comparable> {
+   // AvlTree<HashEntry<TypeKey, TypeValue>>[] table;
+    LinkedList<HashEntry<TypeKey>>[] table;
      HashFunc<TypeKey> hf;
 
 
     public HashTableOpen(int size, HashFunc<TypeKey> f) {
-        this.table = new AvlTree[size];
+      //  this.table = new AvlTree[size];
+        this.table = new LinkedList[size];
         this.hf = f;
         for (int i = 0; i < table.length; i++) {
-            table[i] = new AvlTree<>();
+          //  table[i] = new AvlTree<>();
+            table[i] = new LinkedList<>();
         }
     }
 
@@ -22,38 +25,46 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
        return this.hf.operate(key) %  table.length;
     }
 
-    public void insert(TypeKey clave, TypeValue value) throws Exception {
+    public void insert(TypeKey clave, Testeo value) throws Exception {
         try{
             int pos = hashFunc(clave);
         //    System.out.println(pos); // posicion de la tabla
-        table[pos].insert(new HashEntry<>(clave, value));
+       // table[pos].insert(new HashEntry<>(clave, value));
+            table[pos].add(new HashEntry<>(clave,value));
         }catch(Exception e){
             System.out.println(e);
         }
         
     }
 
-    public TypeValue get(TypeKey clave) throws Exception {
+  /*  public TypeValue get(TypeKey clave) throws Exception {
         int pos = hashFunc(clave);
         return table[pos].get(new HashEntry<>(clave, null)).value;
+    }*/
+    public void get(TypeKey clave) throws Exception{
+        int pos = hashFunc(clave);
+
+        for(int i = 0; i < table[pos].getSize(); i++){
+            table[pos].get(i).value.printData();
+        }
     }
 
     // creada por el uno
-    public void printTree(TypeKey clave) throws Exception {
+ /*   public void printTree(TypeKey clave) throws Exception {
         int pos = hashFunc(clave);
          table[pos].printTree();
-    }
+    }*/
 
-    public void remove(TypeKey clave) throws Exception {
+  /*  public void remove(TypeKey clave) throws Exception {
         int pos = hashFunc(clave);
         table[pos].remove(new HashEntry<>(clave, null));
-    }
+    }*/
 
-    private static class HashEntry<TypeKey extends Comparable, TypeValue> implements Comparable<HashEntry> {
+    private static class HashEntry<TypeKey extends Comparable> implements Comparable<HashEntry> {
         TypeKey key;
-        TypeValue value;
+        Testeo value;
 
-        public HashEntry(TypeKey key, TypeValue value) {
+        public HashEntry(TypeKey key, Testeo value) {
             this.key = key;
             this.value = value;
         }
@@ -66,11 +77,11 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
             this.key = key;
         }
 
-        public TypeValue getValue() {
+        public Testeo getValue() {
             return value;
         }
 
-        public void setValue(TypeValue value) {
+        public void setValue(Testeo value) {
             this.value = value;
         }
 
@@ -78,6 +89,8 @@ public class HashTableOpen<TypeKey extends Comparable, TypeValue> {
         public int compareTo(HashEntry hashEntry) {
             return key.compareTo(hashEntry.getKey());
         }
+
+
     }
 
  /*   public static void main(String[] args) {

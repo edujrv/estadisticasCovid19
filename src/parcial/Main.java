@@ -16,7 +16,7 @@ class Main {
     public static void main(String[] args) {
 
     //    List<Testeo> testeos = new ArrayList<>();
-        HashTableOpen<String, Testeo> testeos = new HashTableOpen<>(127, (a)->{
+        HashTableOpen<String> testeos = new HashTableOpen<>(127, (a)->{
                int x = 0;
               
            
@@ -27,7 +27,7 @@ class Main {
 
             });
        
-        String file = "resources/Covid19Casos-1000.txt.gz";
+        String file = "resources/Covid19Casos-10.txt.gz";
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
         int h = 0;
         float  infectedBySamples = 0, deceasedByInfected = 0;
@@ -78,7 +78,7 @@ class Main {
                     numberOfInfected = (values[20].equals("Confirmado")) ? ++numberOfInfected : numberOfInfected;
                         
                    testeos.insert(values[7], t);
-                   testeos.get(values[7]).printData();
+                 //  testeos.get(values[7]).printData();
                 }
                 bandera = true;
             }
@@ -134,8 +134,9 @@ class Main {
         
         }*/
         try{
-             testeos.get("CABA").printData();
+        //     testeos.get("CABA").printData();
           //   testeos.printTree("CABA");
+            testeos.get("CABA");
              
         } catch(Exception e){
             System.out.println("***********************************************");
