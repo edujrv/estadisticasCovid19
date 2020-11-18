@@ -178,12 +178,22 @@ public class Testeo implements Comparable<Testeo> {
         return ultimaActualizacion;
     }
 
+    public Date getFechaCuidadoDate(){ return fechaCuidadoDate;}
 
     public void printData() {
         System.out.println(idEventoCaso + " - " + sexo + " - " + edad + " - " + edadTipo + " - " + residenciaPais + " - " + residenciaProvincia + " - " + residenciaDepartamento + " - " + cargaProvincia + " - " +
                 fechaInicioSintomas + " - " + fechaApertura + " - " + sepiApertura + " - " + fechaInternacion + " - " + cuidadoIntensivo + " - " + fechaCuidadoIntensivo + " - " + fallecido + " - " + fechaFallecimiento + " - " +
                 asistenciaRespiratoriaMecanica + " - " + cargaProvinciaId + " - " + origenFinanciamiento + " - " + clasificacion + " - " + clasificacionResumen + " - " + residenciaProvinciaId + " - " +
                 fechaDiagnostico + " - " + residenciaDepartamentoId + " - " + ultimaActualizacion);
+    }
+
+    public String getData() {
+        String aux;
+        aux = idEventoCaso + " - " + sexo + " - " + edad + " - " + edadTipo + " - " + residenciaPais + " - " + residenciaProvincia + " - " + residenciaDepartamento + " - " + cargaProvincia + " - " +
+                fechaInicioSintomas + " - " + fechaApertura + " - " + sepiApertura + " - " + fechaInternacion + " - " + cuidadoIntensivo + " - " + fechaCuidadoIntensivo + " - " + fallecido + " - " + fechaFallecimiento + " - " +
+                asistenciaRespiratoriaMecanica + " - " + cargaProvinciaId + " - " + origenFinanciamiento + " - " + clasificacion + " - " + clasificacionResumen + " - " + residenciaProvinciaId + " - " +
+                fechaDiagnostico + " - " + residenciaDepartamentoId + " - " + ultimaActualizacion;
+        return aux;
     }
 
     @Override
@@ -206,7 +216,8 @@ public class Testeo implements Comparable<Testeo> {
      */
     public static Date ParseFecha(String fecha)
     {
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        //SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaDate = null;
         try {
             if(!fecha.equals("0")){
