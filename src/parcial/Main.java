@@ -24,12 +24,14 @@ class Main {
             return x;
             });
        
-        String file = "resources/Covid19Casos-100000.txt.gz";
+        String file = "resources/Covid19Casos-1000.txt.gz";
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
         int h = 0;
         float  infectedBySamples = 0, deceasedByInfected = 0;
-        Integer[] ageRangeInfected = {0,0,0,0,0,0,0,0,0,0,0,0};
-        Integer[] ageRangeDeath = {0,0,0,0,0,0,0,0,0,0,0,0};
+        Integer[] ageRangeInfected = new Integer[15];
+        Arrays.fill(ageRangeInfected,0);
+        Integer[] ageRangeDeath = new Integer[15];
+        Arrays.fill(ageRangeDeath,0);
         try {
             GZIPInputStream gzip = new GZIPInputStream(new FileInputStream(file));
             BufferedReader br = new BufferedReader(new InputStreamReader(gzip));
@@ -144,8 +146,11 @@ class Main {
             }
         
         }*/
-        Provincia.nProvinciasConMasCasos(testeos,5);
-        Provincia.nProvinciasConMasMuertes(testeos, 5);
+      //  Provincia.nProvinciasConMasCasos(testeos,5);
+      //  Provincia.nProvinciasConMasCasos(testeos);
+    //    Provincia.nProvinciasConMasMuertes(testeos, 5);
+     //   Provincia.nProvinciasConMasMuertes(testeos);
+        Provincia.casosEdadAnios(testeos, 20);
         try{
         //     testeos.get("CABA").printData();
           //   testeos.printTree("CABA");

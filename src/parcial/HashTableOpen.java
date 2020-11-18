@@ -47,6 +47,9 @@ public class HashTableOpen<TypeKey extends Comparable> {
         for(int i = 0; i < table[pos].getSize(); i++){
             table[pos].get(i).value.printData();
         }
+
+
+
     }
     public void sumarMuerte(TypeKey clave) throws Exception{
         int pos = hashFunc(clave);
@@ -62,6 +65,8 @@ public class HashTableOpen<TypeKey extends Comparable> {
 
             return table[pos].getSize();
     }
+
+
 
     public LinkedList getList(TypeKey clave) throws Exception{
         int pos = hashFunc(clave);
@@ -79,6 +84,21 @@ public class HashTableOpen<TypeKey extends Comparable> {
             }
 
         }
+    }
+
+    public void printAnios(TypeKey clave, int n) throws Exception{
+        int pos = hashFunc(clave);
+        for(int i = 0; i < table[pos].getSize(); i++){
+            if(table[pos].get(i).value.getEdad() == n){
+                table[pos].get(i).value.printData();
+                table[pos].sumarContarAnios();
+            }
+        }
+    }
+
+    public int getCantAnios(TypeKey clave) throws Exception{
+        int pos = hashFunc(clave);
+        return table[pos].getCantAnios();
     }
 
     // creada por el uno

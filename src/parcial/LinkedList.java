@@ -4,6 +4,7 @@ public class LinkedList<AnyType> {
     private LinkedNode<AnyType> begin;
     private int size;
     private int cantMuertes = 0;
+    private  int cantAnios = 0;
 
     public LinkedList() {
         begin = null;
@@ -124,6 +125,14 @@ public class LinkedList<AnyType> {
     public int getCantMuertes(){
         return cantMuertes;
     }
+
+    public void sumarContarAnios(){
+        cantAnios++;
+    }
+    public int getCantAnios(){
+        return cantAnios;
+    }
+
 
  /*   public void printList(){
         LinkedNode<AnyType> aux = begin;
