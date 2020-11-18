@@ -3,6 +3,7 @@ package parcial;
 public class LinkedList<AnyType> {
     private LinkedNode<AnyType> begin;
     private int size;
+    private int cantMuertes = 0;
 
     public LinkedList() {
         begin = null;
@@ -114,6 +115,14 @@ public class LinkedList<AnyType> {
             dato.next = sig.next;
             sig.next = dato;
         }
+    }
+
+    public void sumarMuerte(){
+        cantMuertes++;
+    }
+
+    public int getCantMuertes(){
+        return cantMuertes;
     }
 
  /*   public void printList(){

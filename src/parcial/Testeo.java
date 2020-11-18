@@ -34,8 +34,11 @@ public class Testeo{
     Testeo() {
 
     }
-    public Testeo(int idEventoCaso, char sexo, int edad, String edadTipo, String residenciaPais, String residenciaProvincia, String residenciaDepartamento, String cargaProvincia, String fechaInicioSintomas, String fechaApertura, String sepiApertura, String fechaInternacion, String cuidadoIntensivo, String fallecido, String fechaCuidadoIntensivo,String fechaFallecimiento, String asistenciaRespiratoriaMecanica,
-                  int cargaProvinciaId, String origenFinanciamiento,  String clasificacion, String clasificacionResumen, int residenciaProvinciaId, String fechaDiagnostico, int residenciaDepartamentoId, String ultimaActualizacion){
+    public Testeo(int idEventoCaso, char sexo, int edad, String edadTipo, String residenciaPais, String residenciaProvincia, String residenciaDepartamento, String cargaProvincia,
+                  String fechaInicioSintomas, String fechaApertura, String sepiApertura, String fechaInternacion, String cuidadoIntensivo,String fechaCuidadoIntensivo,
+                  String fallecido, String fechaFallecimiento, String asistenciaRespiratoriaMecanica,
+                  int cargaProvinciaId, String origenFinanciamiento,  String clasificacion, String clasificacionResumen, int residenciaProvinciaId,
+                  String fechaDiagnostico, int residenciaDepartamentoId, String ultimaActualizacion){
 
 
         this.idEventoCaso = idEventoCaso;
@@ -126,8 +129,8 @@ public class Testeo{
         return fechaCuidadoIntensivo;
     }
 
-    public String isFallecido() {
-        return fallecido;
+    public boolean isFallecido() {
+        return fallecido.equalsIgnoreCase("SI");
     }
 
     public String getFechaFallecimiento() {

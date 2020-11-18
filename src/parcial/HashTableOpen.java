@@ -41,18 +41,44 @@ public class HashTableOpen<TypeKey extends Comparable> {
         int pos = hashFunc(clave);
         return table[pos].get(new HashEntry<>(clave, null)).value;
     }*/
-    public void get(TypeKey clave) throws Exception{
+    public void printList(TypeKey clave) throws Exception{
         int pos = hashFunc(clave);
 
         for(int i = 0; i < table[pos].getSize(); i++){
             table[pos].get(i).value.printData();
         }
     }
+    public void sumarMuerte(TypeKey clave) throws Exception{
+        int pos = hashFunc(clave);
+        table[pos].sumarMuerte();
+    }
+    public int getCantMuerte(TypeKey clave) throws Exception{
+        int pos = hashFunc(clave);
+        return table[pos].getCantMuertes();
+    }
 
     public int getSize(TypeKey clave) throws Exception{
         int pos = hashFunc(clave);
 
             return table[pos].getSize();
+    }
+
+    public LinkedList getList(TypeKey clave) throws Exception{
+        int pos = hashFunc(clave);
+
+        return table[pos];
+    }
+
+
+
+    public void printDeaths(TypeKey clave) throws Exception{
+        int pos = hashFunc(clave);
+        for(int i = 0; i < table[pos].getSize(); i++){
+            if(table[pos].get(i).value.isFallecido()){
+                table[pos].get(i).value.printData();
+            }
+
+        }
     }
 
     // creada por el uno
