@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.file.*;
 import java.util.zip.GZIPInputStream;
+import java.util.Date;
+import java.text.*;
 
 //import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
 
@@ -32,6 +34,7 @@ class Main {
         Arrays.fill(ageRangeInfected,0);
         Integer[] ageRangeDeath = new Integer[15];
         Arrays.fill(ageRangeDeath,0);
+        AvlTree<Testeo> arbol = new AvlTree<Testeo>();
         try {
             GZIPInputStream gzip = new GZIPInputStream(new FileInputStream(file));
             BufferedReader br = new BufferedReader(new InputStreamReader(gzip));
@@ -85,7 +88,9 @@ class Main {
                         testeos.insert(values[7], t);
                     }
 
-
+                    if(!values[13].equals("0")){
+                        arbol.insert(t);
+                    }
 
                     numberOfSamples++;
                     numberOfDeaths = (values[14].equals("SI")) ? ++numberOfDeaths : numberOfDeaths;
@@ -150,7 +155,8 @@ class Main {
       //  Provincia.nProvinciasConMasCasos(testeos);
     //    Provincia.nProvinciasConMasMuertes(testeos, 5);
      //   Provincia.nProvinciasConMasMuertes(testeos);
-        Provincia.casosEdadAnios(testeos, 25);
+      //  Provincia.casosEdadAnios(testeos, 25);
+        arbol.printTree();
         try{
         //     testeos.get("CABA").printData();
           //   testeos.printTree("CABA");

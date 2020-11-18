@@ -1,7 +1,8 @@
 package parcial;
+import java.util.Date;
+import java.text.*;
 
-
-public class Testeo{
+public class Testeo implements Comparable<Testeo> {
 
     private int idEventoCaso;
     private char sexo;
@@ -30,6 +31,7 @@ public class Testeo{
     private int residenciaDepartamentoId;
     private String ultimaActualizacion; //Fecha
 
+    private Date fechaCuidadoDate;
     //****************************** BUILDER *****************************************
     Testeo() {
 
@@ -54,6 +56,7 @@ public class Testeo{
         this.sepiApertura = sepiApertura;
         this.fechaInternacion = fechaInternacion;
         this.cuidadoIntensivo = cuidadoIntensivo;
+
         this.fechaCuidadoIntensivo = fechaCuidadoIntensivo;
         this.fallecido = fallecido;
         this.fechaFallecimiento = fechaFallecimiento;
@@ -66,6 +69,8 @@ public class Testeo{
         this.fechaDiagnostico = fechaDiagnostico;
         this.residenciaDepartamentoId = residenciaDepartamentoId;
         this.ultimaActualizacion = ultimaActualizacion;
+
+        this.fechaCuidadoDate = ParseFecha(fechaCuidadoIntensivo);
 
     }
 //************************** FIN BUILDER ****************************************
@@ -181,9 +186,40 @@ public class Testeo{
                 fechaDiagnostico + " - " + residenciaDepartamentoId + " - " + ultimaActualizacion);
     }
 
+    @Override
+    public int compareTo(Testeo testeo) {
+        if (fechaCuidadoDate.compareTo(testeo.fechaCuidadoDate)== -1) {
+            return -1;
+        }
+        if (fechaCuidadoDate.compareTo(testeo.fechaCuidadoDate)== 1) {
+            return 1;
+        }
+        return 0;
+    }
+
 //**************************FIN GETTERS **************************************
 
+    /**
+     * Permite convertir un String en fecha (Date).
+     * @param fecha Cadena de fecha dd/MM/yyyy
+     * @return Objeto Date
+     */
+    public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        Date fechaDate = null;
+        try {
+            if(!fecha.equals("0")){
+                fechaDate = formato.parse(fecha);
+            }
 
+        }
+        catch (ParseException ex)
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
 
 
 
