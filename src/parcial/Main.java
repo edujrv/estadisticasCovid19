@@ -26,7 +26,7 @@ class Main {
             return x;
             });
        
-        String file = "resources/Covid19Casos-1000.txt.gz";
+        String file = "resources/Covid19Casos.txt.gz";
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
         int h = 0;
         float  infectedBySamples = 0, deceasedByInfected = 0;
@@ -62,38 +62,38 @@ class Main {
                   
                  // hay algunos que no tienen edad, a esos no los tiene que tomar.
                    
-                    if(values[3].equals("Años") && values[20].equals("Confirmado")){
-                        if(!values[2].equals("0")){
-                              h = (int) (Integer.parseInt(values[2])/10);
-                             ageRangeInfected[h] = ageRangeInfected[h] + 1;
+                    if(values[20].equals("Confirmado")){
+                        numberOfInfected++;
+                        testeos.insert(values[7], t);
+
+                        if (values[14].equals("SI")) {
+                            numberOfDeaths++;
+                            testeos.sumarMuerte(values[7]);
+                            h = (int) (Integer.parseInt(values[2]) / 10);
+                            ageRangeDeath[h] = ageRangeDeath[h] + 1;
                         }
-                    }
-                    if(values[3].equals("Meses") && values[20].equals("Confirmado")){
-                        ageRangeInfected[0]++;       // en el caso de que la edad se exprese en meses
-                    }
-                    if(values[14].equals("SI") && !values[2].equals("0")){
-                        h = (int) (Integer.parseInt(values[2])/10);
-                        ageRangeDeath[h] = ageRangeDeath[h] + 1;
+                        if(values[3].equals("Meses")){
+                            ageRangeInfected[0]++;       // en el caso de que la edad se exprese en meses
+                        }else{
+                            h = (int) (Integer.parseInt(values[2]) / 10);
+                            if(h > 14){
+                                ageRangeInfected[14] = ageRangeInfected[14] + 1;
+                            }else{
+                                ageRangeInfected[h] = ageRangeInfected[h] + 1;
+                            }
+
+
+                        }
                     }
 
                     //HAY ALGUNOS CASOS SOSPECHOSOS, NO SE SI INCLUIRLOS
                     //DESCOMENTAR EL ELSE IF PARA INCLUIRLOS
-                    if (values[14].equals("SI")){
-                        numberOfDeaths++;
-                        testeos.sumarMuerte(values[7]);
-                        testeos.insert(values[7], t);
-                    }else if (values[20].equals("Confirmado")){
-                    //}else if (values[20].equals("Confirmado") || values[20].equals("Sospechoso")){
-                        numberOfInfected++;
-                        testeos.insert(values[7], t);
-                    }
 
                     if(!values[13].equals("0")){
                         arbol.insert(t);
                     }
 
                     numberOfSamples++;
-                    numberOfDeaths = (values[14].equals("SI")) ? ++numberOfDeaths : numberOfDeaths;
                         
 
                  //  testeos.get(values[7]).printData();
@@ -118,7 +118,7 @@ class Main {
         }
         System.out.println("Cantidad de fallecidos por rango etario: ");
         for (int i = 0; i < ageRangeDeath.length; i++){
-            System.out.println(" Entre " + (i*10) + " y " + (((i + 1) * 10) - 1) + ": " + ageRangeDeath[i]);
+                System.out.println(" Entre " + (i*10) + " y " + (((i + 1) * 10) - 1) + ": " + ageRangeDeath[i]);
         }
         
 
@@ -152,23 +152,23 @@ class Main {
         
         }*/
       //  Provincia.nProvinciasConMasCasos(testeos,5);
-      //  Provincia.nProvinciasConMasCasos(testeos);
+       // Provincia.nProvinciasConMasCasos(testeos);
     //    Provincia.nProvinciasConMasMuertes(testeos, 5);
      //   Provincia.nProvinciasConMasMuertes(testeos);
       //  Provincia.casosEdadAnios(testeos, 25);
-        arbol.printTree();
-        try{
+        //arbol.printTree();
+     /*   try{
         //     testeos.get("CABA").printData();
           //   testeos.printTree("CABA");
             //testeos.get("CABA")
 
-            System.out.println("Cantidad de casos: " + testeos.getSize("CABA"));
+           // System.out.println("Cantidad de casos: " + numberOfInfected);
              
         } catch(Exception e){
             System.out.println("***********************************************");
             System.out.println(e);
             System.out.println("***********************************************");
-        }
+        }*/
 
 
 
