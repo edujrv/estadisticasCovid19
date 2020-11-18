@@ -14,7 +14,7 @@ import java.util.zip.GZIPInputStream;
 
 class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
     //    List<Testeo> testeos = new ArrayList<>();
         HashTableOpen<String> testeos = new HashTableOpen<>(127, (a)->{
@@ -69,12 +69,15 @@ class Main {
                         h = (int) (Integer.parseInt(values[2])/10);
                         ageRangeDeath[h] = ageRangeDeath[h] + 1;
                     }
-                 
+                    if (values[20].equals("Confirmado")){
+                        numberOfInfected++;
+                        testeos.insert(values[7], t);
+                    }
+
                     numberOfSamples++;
                     numberOfDeaths = (values[14].equals("SI")) ? ++numberOfDeaths : numberOfDeaths;
-                    numberOfInfected = (values[20].equals("Confirmado")) ? ++numberOfInfected : numberOfInfected;
                         
-                   testeos.insert(values[7], t);
+
                  //  testeos.get(values[7]).printData();
                 }
                 bandera = true;
@@ -142,6 +145,69 @@ class Main {
             System.out.println(e);
             System.out.println("***********************************************");
         }
-       
+
+        Provincia[] arrayProv = new Provincia[24];
+
+        arrayProv[0] = new Provincia("CABA", testeos.getSize("CABA"));
+        arrayProv[1] = new Provincia("Buenos Aires", testeos.getSize("Buenos Aires"));
+        arrayProv[2] = new Provincia("Mendoza", testeos.getSize("Mendoza"));
+        arrayProv[3] = new Provincia("San Juan", testeos.getSize("San Juan"));
+        arrayProv[4] = new Provincia("Formosa", testeos.getSize("Formosa"));
+        arrayProv[5] = new Provincia("Santa Fe", testeos.getSize("Santa Fe"));
+        arrayProv[6] = new Provincia("San Luis", testeos.getSize("San Luis"));
+        arrayProv[7] = new Provincia("Entre Ríos", testeos.getSize("Entre Ríos"));
+        arrayProv[8] = new Provincia("Tucumán", testeos.getSize("Tucumán"));
+        arrayProv[9] = new Provincia("Chaco", testeos.getSize("Chaco"));
+        arrayProv[10] = new Provincia("Corrientes", testeos.getSize("Corrientes"));
+        arrayProv[11] = new Provincia("Río Negro", testeos.getSize("Río Negro"));
+        arrayProv[12] = new Provincia("Santa Cruz", testeos.getSize("Santa Cruz"));
+        arrayProv[13] = new Provincia("Salta", testeos.getSize("Salta"));
+        arrayProv[14] = new Provincia("Jujuy", testeos.getSize("Jujuy"));
+        arrayProv[15] = new Provincia("Neuquén", testeos.getSize("Neuquén"));
+        arrayProv[16] = new Provincia("La Pampa", testeos.getSize("La Pampa"));
+        arrayProv[17] = new Provincia("La Rioja", testeos.getSize("La Rioja"));
+        arrayProv[18] = new Provincia("Misiones", testeos.getSize("Misiones"));
+        arrayProv[19] = new Provincia("Santiago del Estero", testeos.getSize("Santiago del Estero"));
+        arrayProv[20] = new Provincia("Tierra del Fuego", testeos.getSize("Tierra del Fuego"));
+        arrayProv[21] = new Provincia("Chubut", testeos.getSize("Chubut"));
+        arrayProv[22] = new Provincia("Catamarca", testeos.getSize("Catamarca"));
+        arrayProv[23] = new Provincia("Córdoba", testeos.getSize("Córdoba"));
+
+        Arrays.sort(arrayProv);
+
+        //imprimeArrayPersonas(arrayProv);
+        System.out.println(arrayProv[23].nombre + ": " + arrayProv[23].cantCasos);
+
+
+        }
+
+    static class Provincia implements  Comparable <Provincia> {
+
+        public String nombre;
+        public int cantCasos = 0;
+
+        public Provincia(String nombre, int cantCasos){
+            this.nombre = nombre;
+            this.cantCasos = cantCasos;
+        }
+        @Override
+        public int compareTo(Provincia o) {
+            if (cantCasos < o.cantCasos) {
+                return -1;
+            }
+            if (cantCasos > o.cantCasos) {
+                return 1;
+            }
+            return 0;
+        }
+
     }
+        static void imprimeArrayPersonas(Provincia[] array) {
+            for (int i = 0; i < array.length; i++) {
+                System.out.println(array[i].nombre + ": " + array[i].cantCasos);
+            }
+        }
+
 }
+
+
