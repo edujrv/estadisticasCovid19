@@ -176,8 +176,10 @@ class Main {
         Arrays.sort(arrayProv);
 
         //imprimeArrayPersonas(arrayProv);
-        System.out.println(arrayProv[23].nombre + ": " + arrayProv[23].cantCasos);
+        //System.out.println(arrayProv[23].nombre + ": " + arrayProv[23].cantCasos);
 
+        //IMPRIMIR LAS N PRIMERAS PROVINCIAS CON MAS CASOS
+        imprimeArrayProvincias(arrayProv, testeos,5);
 
         }
 
@@ -202,12 +204,13 @@ class Main {
         }
 
     }
-        static void imprimeArrayPersonas(Provincia[] array) {
-            for (int i = 0; i < array.length; i++) {
-                System.out.println(array[i].nombre + ": " + array[i].cantCasos);
-            }
+    //IMPRIMIR LAS N PRIMERAS PROVINCIAS CON MAS CASOS
+    static void imprimeArrayProvincias(Provincia[] array, HashTableOpen<String> testeos, int n) throws Exception {
+        for (int i = array.length - 1;  i >= 0 && n >= 0; i--, n--) {
+            System.out.println(array[i].nombre + ": " + array[i].cantCasos);
+            testeos.get(array[i].nombre);
         }
-
+    }
 }
 
 
