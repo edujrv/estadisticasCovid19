@@ -150,7 +150,7 @@ class Main {
       //  Provincia.nProvinciasConMasCasos(testeos);
     //    Provincia.nProvinciasConMasMuertes(testeos, 5);
      //   Provincia.nProvinciasConMasMuertes(testeos);
-        Provincia.casosEdadAnios(testeos, 20);
+        Provincia.casosEdadAnios(testeos, 25);
         try{
         //     testeos.get("CABA").printData();
           //   testeos.printTree("CABA");
