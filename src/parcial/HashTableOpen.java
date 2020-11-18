@@ -49,6 +49,12 @@ public class HashTableOpen<TypeKey extends Comparable> {
         }
     }
 
+    public int getSize(TypeKey clave) throws Exception{
+        int pos = hashFunc(clave);
+
+            return table[pos].getSize();
+    }
+
     // creada por el uno
  /*   public void printTree(TypeKey clave) throws Exception {
         int pos = hashFunc(clave);

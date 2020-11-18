@@ -1,6 +1,7 @@
 package parcial;
 
 import java.io.*;
+import java.net.StandardSocketOptions;
 import java.util.*;
 
 import java.io.BufferedReader;
@@ -18,16 +19,12 @@ class Main {
     //    List<Testeo> testeos = new ArrayList<>();
         HashTableOpen<String> testeos = new HashTableOpen<>(127, (a)->{
                int x = 0;
-              
-           
                 x = (a.charAt(0) * a.charAt(a.length()- 4) + a.length() - a.charAt(a.length()-1))  % 127; 
                 x = Math.abs(x);
- 
             return x;
-
             });
        
-        String file = "resources/Covid19Casos-10.txt.gz";
+        String file = "resources/Covid19Casos-1000.txt.gz";
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
         int h = 0;
         float  infectedBySamples = 0, deceasedByInfected = 0;
@@ -57,7 +54,7 @@ class Main {
                             values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15],
                             values[16], Integer.parseInt(values[17]), values[18], values[19], values[20], Integer.parseInt(values[21]), values[22], Integer.parseInt(values[23]), values[24]);
                   
-                 // hay algunos q no tienen edad, a esos no los tiene que tomar 
+                 // hay algunos que no tienen edad, a esos no los tiene que tomar.
                    
                     if(values[3].equals("Años") && values[20].equals("Confirmado")){
                         if(!values[2].equals("0")){
@@ -90,7 +87,7 @@ class Main {
         System.out.println("Cantidad de muestras: " + numberOfSamples);
         System.out.println("Cantidad de fallecidos: " + numberOfDeaths);
         System.out.println("Cantidad de Infectados: " + numberOfInfected);
-      infectedBySamples = numberOfInfected * 100 / numberOfSamples;
+        infectedBySamples = numberOfInfected * 100 / numberOfSamples;
         System.out.println("Infectados por muestras: % " + infectedBySamples);
         deceasedByInfected = numberOfDeaths * 100 / numberOfInfected;
         System.out.println("Fallecidos por infectados: % " + deceasedByInfected );
@@ -136,12 +133,14 @@ class Main {
         try{
         //     testeos.get("CABA").printData();
           //   testeos.printTree("CABA");
-            testeos.get("CABA");
+            //testeos.get("CABA")
+
+            System.out.println("Cantidad de casos: " + testeos.getSize("CABA"));
              
         } catch(Exception e){
             System.out.println("***********************************************");
-           System.out.println(e);
-           System.out.println("***********************************************");
+            System.out.println(e);
+            System.out.println("***********************************************");
         }
        
     }
