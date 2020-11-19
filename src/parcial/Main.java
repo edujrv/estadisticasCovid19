@@ -17,7 +17,7 @@ class Main {
         long t_final = 0;
 
         t_inicio = System.nanoTime();
-    //    List<Testeo> testeos = new ArrayList<>();
+
         HashTableOpen<String> testeos = new HashTableOpen<>(127, (a)->{
                int x = 0;
                 x = (a.charAt(0) * a.charAt(a.length()- 4) + a.length() - a.charAt(a.length()-1))  % 127;
@@ -204,12 +204,14 @@ class Main {
                             mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
                                     deceasedByInfected, ageRangeInfected, ageRangeDeath);
                         }else{
-                            arbol.printTree();
+                            //arbol.printTree();
+                            arbol.printInOrder();
                         }
                         break;
                     }
                     default: {
-                        arbol.printTree();
+                       // arbol.printTree();
+                        arbol.printInOrder();
                         break;
                     }
                 }

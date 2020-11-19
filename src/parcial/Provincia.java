@@ -129,10 +129,13 @@ public  class Provincia{
 
         for (int i =0; i < arrayProv.length; i++) {
             System.out.println(arrayProv[i].nombre);
-                for(int j= 0; j < testeos.getSize(arrayProv[i].nombre)-1; j++){
-                    testeos.printAnios(arrayProv[i].nombre, n);
 
+                for(int j= 0; j < testeos.getSize(arrayProv[i].nombre)-1; j++){
+
+                    testeos.printAnios(arrayProv[i].nombre, n);
                 }
+
+
             System.out.println("Total: " + testeos.getCantAnios(arrayProv[i].nombre));
                 System.out.println("");
 
