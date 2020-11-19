@@ -21,7 +21,9 @@ class Main {
             return x;
             });
 
-        String file = "resources/Covid19Casos-1000.txt.gz";
+        //String file = "resources/Covid19Casos-1000.txt.gz";
+        String file = "resources/" + args[args.length-1];
+
         int numberOfSamples = 0, numberOfDeaths = 0, numberOfInfected = 0;
         int h = 0;
         float  infectedBySamples = 0, deceasedByInfected = 0;
@@ -78,22 +80,42 @@ class Main {
                             }
                         }
                     }
-                    if (args[0].equals("casos_cui") && args.length == 2){
-                        Date fechaAComparar = Testeo.ParseFecha(args[1]);
 
-                        if(!values[13].equals("0") && fechaAComparar.before(t.getFechaCuidadoDate())){
-                            ParFechaCaso x = new ParFechaCaso(t.ParseFecha(values[13]), t);
-                            arbol.insert(x);
-                        }
-                    }else if (args[0].equals("casos_cui")&& args.length < 2){
+                    if (args[0].equals("casos_cui") && !values[13].equals("0")){ //si se le ingresa el argumento de cuidado intensivo y
+                                                                                // ademas este testeo tiene ciudado intensivo
 
-                        if(!values[13].equals("0")){
-                            ParFechaCaso x = new ParFechaCaso(t.ParseFecha(values[13]), t);
-                            arbol.insert(x);
+                        int y = args.length;
+
+                        switch (y){
+
+                            case 4:{
+                                Date fechaAComparar = Testeo.ParseFecha(args[1]);
+                                if (fechaAComparar.before(t.getFechaCuidadoDate())) {
+                                    ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                    arbol.insert(x);
+                                }
+                                break;
+                            }
+                            case 3:{
+                                if (!args[1].equals("estad")){
+                                    Date fechaAComparar = Testeo.ParseFecha(args[1]);
+                                    if (fechaAComparar.before(t.getFechaCuidadoDate())) {
+                                        ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                        arbol.insert(x);
+                                    }
+                                }else{
+                                    ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                    arbol.insert(x);
+                                }
+                                break;
+                            }
+                            default:{
+                                ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                arbol.insert(x);
+                            }
                         }
+
                     }
-
-
 
                     numberOfSamples++;
                 }
@@ -111,47 +133,81 @@ class Main {
                 break;
             }
             case "p_casos": {
-                if (args.length < 2){
-                    Provincia.nProvinciasConMasCasos(testeos);
-                }
-                else if (Integer.parseInt(args[1]) > 0 && Integer.parseInt(args[1]) < 25){
+
+                if (args.length == 4){
                     Provincia.nProvinciasConMasCasos(testeos, Integer.parseInt(args[1]));
-                }
-                else {
-                    System.out.println("****************** N ERRONEO *********************");
+                    mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
+                            deceasedByInfected, ageRangeInfected, ageRangeDeath);
+                }else if (args.length==3){
+                    if (args[1].equals("estad")){
+                        Provincia.nProvinciasConMasCasos(testeos);
+                        mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
+                                deceasedByInfected, ageRangeInfected, ageRangeDeath);
+                    }else{
+                        Provincia.nProvinciasConMasCasos(testeos, Integer.parseInt(args[1]));
+                    }
+                }else{
+                    Provincia.nProvinciasConMasCasos(testeos);
                 }
                 break;
             }
 
             case "p_muertes": {
-                if (args.length < 2){
-                    Provincia.nProvinciasConMasMuertes(testeos);
-                }
-                else if (Integer.parseInt(args[1]) > 0 && Integer.parseInt(args[1]) < 25){
+
+                if (args.length == 4){
                     Provincia.nProvinciasConMasMuertes(testeos, Integer.parseInt(args[1]));
-                }
-                else {
-                    System.out.println("****************** N ERRONEO *********************");
+                    mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
+                            deceasedByInfected, ageRangeInfected, ageRangeDeath);
+                }else if (args.length==3){
+                    if (args[1].equals("estad")){
+                        Provincia.nProvinciasConMasMuertes(testeos);
+                        mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
+                                deceasedByInfected, ageRangeInfected, ageRangeDeath);
+                    }else{
+                        Provincia.nProvinciasConMasMuertes(testeos, Integer.parseInt(args[1]));
+                    }
+                }else{
+                    Provincia.nProvinciasConMasMuertes(testeos);
                 }
                 break;
             }
             case "casos_edad": {
-                if (args.length < 2){
-                    System.out.println("****************** N ERRONEO *********************");
-                    break;
-                }
-                if (Integer.parseInt(args[1]) > 0 && Integer.parseInt(args[1]) < 125){
+
+                if (args.length == 4){
                     Provincia.casosEdadAnios(testeos, Integer.parseInt(args[1]));
-                }
-                else {
-                    System.out.println("****************** N ERRONEO *********************");
+                    mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
+                            deceasedByInfected, ageRangeInfected, ageRangeDeath);
+                } else {
+                    Provincia.casosEdadAnios(testeos, Integer.parseInt(args[1]));
                 }
                 break;
             }
 
             case "casos_cui": {
-                   arbol.printTree();
-                   break;
+                int x = args.length;
+                switch (x){
+                    case 4:{
+                        arbol.printTree();
+                        mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
+                                deceasedByInfected, ageRangeInfected, ageRangeDeath);
+                        break;
+                    }
+                    case 3:{
+                        if (args[1].equals("estad")){
+                            arbol.printTree();
+                            mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
+                                    deceasedByInfected, ageRangeInfected, ageRangeDeath);
+                        }else{
+                            arbol.printTree();
+                        }
+                        break;
+                    }
+                    default: {
+                        arbol.printTree();
+                        break;
+                    }
+                }
+                break;
             }
 
             default:{
