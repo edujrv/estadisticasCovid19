@@ -70,7 +70,7 @@ public class Testeo implements Comparable<Testeo> {
         this.residenciaDepartamentoId = residenciaDepartamentoId;
         this.ultimaActualizacion = ultimaActualizacion;
 
-        this.fechaCuidadoDate = ParseFecha(fechaCuidadoIntensivo);
+        this.fechaCuidadoDate = Fecha.ParseFecha(fechaCuidadoIntensivo);
 
     }
 //************************** FIN BUILDER ****************************************
@@ -206,32 +206,6 @@ public class Testeo implements Comparable<Testeo> {
         }
         return 0;
     }
-
-//**************************FIN GETTERS **************************************
-
-    /**
-     * Permite convertir un String en fecha (Date).
-     * @param fecha Cadena de fecha dd/MM/yyyy
-     * @return Objeto Date
-     */
-    public static Date ParseFecha(String fecha)
-    {
-        //SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaDate = null;
-        try {
-            if(!fecha.equals("0")){
-                fechaDate = formato.parse(fecha);
-            }
-
-        }
-        catch (ParseException ex)
-        {
-            System.out.println(ex);
-        }
-        return fechaDate;
-    }
-
 
 
 }

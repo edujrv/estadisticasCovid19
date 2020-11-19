@@ -13,6 +13,10 @@ class Main {
 
     public static void main(String[] args) throws Exception {
 
+        long t_inicio = 0; /* Para contar cuanto tarda */
+        long t_final = 0;
+
+        t_inicio = System.nanoTime();
     //    List<Testeo> testeos = new ArrayList<>();
         HashTableOpen<String> testeos = new HashTableOpen<>(127, (a)->{
                int x = 0;
@@ -89,28 +93,28 @@ class Main {
                         switch (y){
 
                             case 4:{
-                                Date fechaAComparar = Testeo.ParseFecha(args[1]);
+                                Date fechaAComparar = Fecha.ParseFecha(args[1]);
                                 if (fechaAComparar.before(t.getFechaCuidadoDate())) {
-                                    ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                    ParFechaCaso x = new ParFechaCaso(Fecha.ParseFecha(values[13]), t);
                                     arbol.insert(x);
                                 }
                                 break;
                             }
                             case 3:{
                                 if (!args[1].equals("estad")){
-                                    Date fechaAComparar = Testeo.ParseFecha(args[1]);
+                                    Date fechaAComparar = Fecha.ParseFecha(args[1]);
                                     if (fechaAComparar.before(t.getFechaCuidadoDate())) {
-                                        ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                        ParFechaCaso x = new ParFechaCaso(Fecha.ParseFecha(values[13]), t);
                                         arbol.insert(x);
                                     }
                                 }else{
-                                    ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                    ParFechaCaso x = new ParFechaCaso(Fecha.ParseFecha(values[13]), t);
                                     arbol.insert(x);
                                 }
                                 break;
                             }
                             default:{
-                                ParFechaCaso x = new ParFechaCaso(Testeo.ParseFecha(values[13]), t);
+                                ParFechaCaso x = new ParFechaCaso(Fecha.ParseFecha(values[13]), t);
                                 arbol.insert(x);
                             }
                         }
@@ -187,14 +191,16 @@ class Main {
                 int x = args.length;
                 switch (x){
                     case 4:{
-                        arbol.printTree();
+                       // arbol.printTree();
+                        arbol.printInOrder();
                         mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
                                 deceasedByInfected, ageRangeInfected, ageRangeDeath);
                         break;
                     }
                     case 3:{
                         if (args[1].equals("estad")){
-                            arbol.printTree();
+                           // arbol.printTree();
+                            arbol.printInOrder();
                             mostrarEstadisticas(numberOfSamples, numberOfDeaths, numberOfInfected, infectedBySamples,
                                     deceasedByInfected, ageRangeInfected, ageRangeDeath);
                         }else{
@@ -214,8 +220,11 @@ class Main {
                 System.out.println("*************** ARGUMENTO NO VALIDO *******************");
                 break;
             }
-        }
 
+        }
+        t_final = System.nanoTime();
+
+        System.out.println((t_final - t_inicio) / 1000000 + "ms"); // Para que imprima
 
     }
 

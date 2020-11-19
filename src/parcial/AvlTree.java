@@ -320,6 +320,12 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
         print(false, identacion + (esDerecho ? "|    " : "     "), r.left);
     }
 
+    public void printInOrder() {
+        if (root != null) root.printInOrder();
+
+    }
+
+
     /**
      * Double rotate binary tree node: first right child with its left child; then
      * node k1 with new right child. For AVL trees, this is a double rotation for
@@ -341,12 +347,21 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
             left = lt;
             right = rt;
             height = 0;
+
+        }
+        public void printInOrder() {
+            if (right != null)
+                right.printInOrder();
+            System.out.println(data);
+            if (left != null)
+                left.printInOrder();
         }
 
         AnyType data; // The data in the node
         AvlNode<AnyType> left; // Left child
         AvlNode<AnyType> right; // Right child
         int height; // Height
+
     }
 
     /**
@@ -354,23 +369,6 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
      */
     private AvlNode<AnyType> root;
 
-    // Test program
-    public static void main(String[] args) {
-        AvlTree<Integer> t = new AvlTree<>();
 
-        for (int i = 0; i < 20; i++) {
 
-            t.insert(i);
-            t.printTree();
-            System.out.println("");
-            System.out.println("");
-        }
-        for (int i = 0; i < 20; i++) {
-
-            t.remove(i);
-            t.printTree();
-            System.out.println("");
-            System.out.println("");
-        }
-    }
 }
